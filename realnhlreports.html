@@ -1,0 +1,66 @@
+<head>
+  <title>Real NHL Reports</title>
+</head>
+
+<body>
+	<div class="container">	
+		<p>
+	  	<div class="jumbotron well">
+		    <h1>@RealNHLReports</h1> 
+			</div>
+		</p>
+
+		{{#if currentUser}}
+			<p>
+				<h1>Please enter your tweet.</h1>
+				{{> submit }}
+			</p>
+
+			<p>
+				{{> queue }}
+			</p>
+		{{else}}
+  		<h1>Welcome to Real NHL Reports!</h1>
+			{{> loginButtons }}
+		{{/if}}
+
+	</div>
+</body>
+
+<template name="submit">
+	<form>
+		<input type="text" name="text" placeholder="Tweet" />
+		<input type="text" name="logic" placeholder="Logic to support tweet..." />
+		<input type="submit" value="Submit Tweet" />
+	</form>
+</template>
+
+<template name="queue">
+	<h1>Tweet Queue</h1>
+	 <table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Tweet</th>
+      <th>Info</th>
+      <th>Submitted</th>
+      <th>Approved</th>
+      <th>Posted</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{{#each tweets}}
+			{{> tweet}}
+		{{/each}}	
+  </tbody>
+ </table>
+</template>
+
+<template name="tweet">
+	<tr>
+		<td>{{text}}</td>
+		<td>{{logic}}</td>
+		<td>{{email}}</td>
+		<td>{{isApproved}}</td>
+		<td>{{isPosted}}</td>
+	</tr>
+</template>
