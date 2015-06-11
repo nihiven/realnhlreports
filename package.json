@@ -1,0 +1,25 @@
+{
+  "name": "rnhln",
+  "version": "0.1",
+  "description": "Queue",
+  "main": "realnhlreport.js",
+  "scripts": {
+    "start": "node realnhlreport.js"
+  },
+  "dependencies": {
+    "mongo": "",
+    "bootstrap": ""
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
+}
