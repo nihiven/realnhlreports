@@ -1,6 +1,5 @@
 {
   "name": "rnhln",
-  "version": "0.1",
   "description": "Queue",
   "main": "realnhlreport.js",
   "scripts": {
