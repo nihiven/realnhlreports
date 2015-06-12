@@ -7,8 +7,6 @@
     "start": "node realnhlreport.js"
   },
   "dependencies": {
-    "mongo": "",
-    "bootstrap": ""
   },
   "engines": {
     "node": "0.10.21"
