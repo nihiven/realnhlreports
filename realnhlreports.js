@@ -5,7 +5,7 @@ if (Meteor.isClient) {
 
   Template.submit.events({
     'submit form': function (event) {
-      var email = Meteor.user().emails[0].address;
+      var username = Meteor.user().username;
       var text = event.target.text.value;
       var logic = event.target.logic.value;
 
@@ -14,9 +14,10 @@ if (Meteor.isClient) {
         ownerId: Meteor.userId(),
         text: text,
         logic: logic,
-        email: email,
+        username: username,
         approved: false,
         posted: false,
+        votes: {},
         createdAt: new Date() // current time
       });
 
@@ -36,14 +37,40 @@ if (Meteor.isClient) {
   });
 
   Template.tweet.helpers({
-    isApproved: function() {
-      return '?';
-    },
-    isPosted: function () {
-      return '?';
+    isOwner: function() {
+      return ((this.ownerId == Meteor.userId()) ? true : false);
     }
   });
 
+  Template.submit.helpers({
+    username: function() {
+      return Meteor.user().username;
+    }
+  });
 
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
+}
+
+//////////// server stuff
+// TODO: How do I move this into another file?
+if (Meteor.isServer) {
+  Meteor.startup(function () {
+    
+  });
+
+  // when a user is created we'll need to add some of our properties
+  // favorites: an array of the users favorite files/lists
+  Accounts.onCreateUser(function(options, user) {
+    if (options.profile) {
+      user.profile = options.profile;
+    } else {
+      user.profile = {};
+    }
+    // user favorite arrays; files and lists
+    user.profile.admin = false;
+    return user;
+  });
 }
 

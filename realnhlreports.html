@@ -6,45 +6,67 @@
 	<div class="container">	
 		<p>
 	  	<div class="jumbotron well">
-		    <h1>@RealNHLReports</h1> 
+		    <h1>@RealNHLReports</h1>
 			</div>
 		</p>
-
 		{{#if currentUser}}
+			{{> user}}
+			<hr>
 			<p>
-				<h1>Please enter your tweet.</h1>
+				<h4>Please enter a tweet.</h4>
 				{{> submit }}
 			</p>
-
+			<hr>
 			<p>
 				{{> queue }}
 			</p>
 		{{else}}
-  		<h1>Welcome to Real NHL Reports!</h1>
+  		<h4>Welcome to Real NHL Reports!</h4>
 			{{> loginButtons }}
 		{{/if}}
 
-	</div>
+	</div> <!-- container -->
+	<footer id="footer">
+	  <hr>
+	  <a href="http://twiter.com/realnhlreports">twitter</a>
+	</footer>
+
 </body>
+
+<!-- templates -->
+<template name="user">
+  <p>
+		<h4>Please post tweets below. Some guidelines...</h4>
+		<ul>
+			<li>Everything is made up.</li>
+			<li>The best tweets are supported by logic, no matter how out of left field.</li>
+			<li>Tweets should remain in the 3-5ft end of the pool... Mario is not coming back.</li>
+			<li>We will always site our source as 'Source.'</li>
+			<li>The more believeable the better.</li>
+		</ul>
+  </p>
+</template>
 
 <template name="submit">
 	<form>
-		<input type="text" name="text" placeholder="Tweet" />
-		<input type="text" name="logic" placeholder="Logic to support tweet..." />
+		<input class="input-xxlarge" type="text" name="user" placeholder="{{username}}" disabled><br>
+		<input class="input-xxlarge" type="text" name="text" placeholder="Tweet" /><br>
+		<textarea class="input-xxlarge" rows="6" cols="200" name="logic" placeholder="Logic to support tweet..."></textarea><br>
 		<input type="submit" value="Submit Tweet" />
 	</form>
 </template>
 
 <template name="queue">
-	<h1>Tweet Queue</h1>
+	<h4>Tweet Queue</h4>
 	 <table class="table table-condensed">
   <thead>
     <tr>
       <th>Tweet</th>
-      <th>Info</th>
-      <th>Submitted</th>
+      <th>Logic</th>
+      <th>Submitted by</th>
       <th>Approved</th>
       <th>Posted</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -59,8 +81,27 @@
 	<tr>
 		<td>{{text}}</td>
 		<td>{{logic}}</td>
-		<td>{{email}}</td>
-		<td>{{isApproved}}</td>
-		<td>{{isPosted}}</td>
+		<td>{{username}}</td>
+		
+		{{#if approved}}
+			<td><i class="fa fa-check"></i></td>
+		{{else}}
+			<td><i class="fa fa-times"></i></td>
+		{{/if}}
+		
+		<td>
+			{{#if posted}}
+				<a href="{{link}}">Twitter</a>
+			{{else}}
+				<i class="fa fa-times"></i>
+			{{/if}}
+		</td>
+
+		<td>
+			{{#if isOwner}}
+				<i class="fa fa-trash-o fa-lg delete"></i>
+			{{/if}}
+		</td>
+
 	</tr>
 </template>
