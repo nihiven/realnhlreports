@@ -15,8 +15,10 @@ footer hr {
 
 i.favorite:hover {
   color: #FF0000;
+  cursor: pointer;
 }
 
 i.delete:hover {
-  color: #00AA00;
+  color: #AA0000;
+  cursor: pointer;
 }

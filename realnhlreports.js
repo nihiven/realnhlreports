@@ -3,6 +3,7 @@ Tweets = new Mongo.Collection("tweets");
 
 if (Meteor.isClient) {
 
+  //////////// events
   Template.submit.events({
     'submit form': function (event) {
       var username = Meteor.user().username;
@@ -30,6 +31,16 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.tweet.events({
+    'click .delete': function (event) {
+      if (this.ownerId == Meteor.userId()) {
+        // TODO: remove from users' favorites
+        Tweets.remove(this._id);  
+      } 
+    }
+  });
+
+  //////////// helpers
   Template.queue.helpers({
     tweets: function () {
       return Tweets.find();
